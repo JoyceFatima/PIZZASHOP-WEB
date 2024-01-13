@@ -1,11 +1,12 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from 'lucide-react'
+import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 
-import { Button } from './ui/button'
+import {
+  Pagination as PaginationRoot,
+  PaginationContent,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
 export interface PaginationProps {
   pageIndex: number
@@ -21,34 +22,30 @@ export function Pagination({
   const pages = Math.ceil(totalCount / perPage) || 1
 
   return (
-    <div className="flex items-center justify-between">
+    <PaginationRoot className="flex items-center justify-between">
       <span className="text-sm text-muted-foreground">
         Total de {totalCount} items(s)
       </span>
 
-      <div className="flex items-center gap-6 lg:gap-8">
-        <div className="text-sm font-medium">
-          Página {pageIndex + 1} de {pages}
+      <PaginationContent>
+        <div className="flex items-center gap-6 lg:gap-8">
+          <div className="text-sm font-medium">
+            Página {pageIndex + 1} de {pages}
+          </div>
+          <div className="flex items-center gap-2">
+            <PaginationLink className="h-8 w-8 p-0">
+              <ChevronsLeft className="h-4 w-4" />
+              <span className="sr-only">Primeira página</span>
+            </PaginationLink>
+            <PaginationPrevious className="h-8 w-8 p-0" />
+            <PaginationNext className="h-8 w-8 p-0" />
+            <PaginationLink className="h-8 w-8 p-0">
+              <ChevronsRight className="h-4 w-4" />
+              <span className="sr-only">Última página</span>
+            </PaginationLink>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" className="h-8 w-8 p-0">
-            <ChevronsLeft className="h-4 w-4" />
-            <span className="sr-only">Primeira página</span>
-          </Button>
-          <Button variant="outline" className="h-8 w-8 p-0">
-            <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Próxima página</span>
-          </Button>
-          <Button variant="outline" className="h-8 w-8 p-0">
-            <ChevronRight className="h-4 w-4" />
-            <span className="sr-only">Página anterior</span>
-          </Button>
-          <Button variant="outline" className="h-8 w-8 p-0">
-            <ChevronsRight className="h-4 w-4" />
-            <span className="sr-only">Última página</span>
-          </Button>
-        </div>
-      </div>
-    </div>
+      </PaginationContent>
+    </PaginationRoot>
   )
 }

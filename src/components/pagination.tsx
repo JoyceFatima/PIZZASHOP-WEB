@@ -3,21 +3,24 @@ import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 import {
   Pagination as PaginationRoot,
   PaginationContent,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+
+import { Button } from './ui/button'
 
 export interface PaginationProps {
   pageIndex: number
   totalCount: number
   perPage: number
+  onPageChange: (pageIndex: number) => Promise<void> | void
 }
 
 export function Pagination({
   pageIndex,
   perPage,
   totalCount,
+  onPageChange,
 }: PaginationProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
 
@@ -33,16 +36,34 @@ export function Pagination({
             Página {pageIndex + 1} de {pages}
           </div>
           <div className="flex items-center gap-2">
-            <PaginationLink className="h-8 w-8 p-0">
+            <Button
+              onClick={() => onPageChange(0)}
+              variant="ghost"
+              className="h-8 w-8 p-0"
+              disabled={pageIndex === 0}
+            >
               <ChevronsLeft className="h-4 w-4" />
               <span className="sr-only">Primeira página</span>
-            </PaginationLink>
-            <PaginationPrevious className="h-8 w-8 p-0" />
-            <PaginationNext className="h-8 w-8 p-0" />
-            <PaginationLink className="h-8 w-8 p-0">
+            </Button>
+            <PaginationPrevious
+              onClick={() => onPageChange(pageIndex - 1)}
+              className="h-8 w-8 p-0"
+              disabled={pageIndex === 0}
+            />
+            <PaginationNext
+              onClick={() => onPageChange(pageIndex + 1)}
+              className="h-8 w-8 p-0"
+              disabled={pageIndex === pages - 1}
+            />
+            <Button
+              onClick={() => onPageChange(pages - 1)}
+              variant="ghost"
+              className="h-8 w-8 p-0"
+              disabled={pageIndex === pages - 1}
+            >
               <ChevronsRight className="h-4 w-4" />
               <span className="sr-only">Última página</span>
-            </PaginationLink>
+            </Button>
           </div>
         </div>
       </PaginationContent>

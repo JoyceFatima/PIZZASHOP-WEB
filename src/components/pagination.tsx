@@ -1,4 +1,9 @@
-import { ChevronsLeft, ChevronsRight } from 'lucide-react'
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from 'lucide-react'
 
 import {
   Pagination as PaginationRoot,
@@ -25,48 +30,54 @@ export function Pagination({
   const pages = Math.ceil(totalCount / perPage) || 1
 
   return (
-    <PaginationRoot className="flex items-center justify-between">
+    <div className="flex items-center justify-between">
       <span className="text-sm text-muted-foreground">
-        Total de {totalCount} items(s)
+        Total de {totalCount} item(s)
       </span>
 
-      <PaginationContent>
-        <div className="flex items-center gap-6 lg:gap-8">
-          <div className="text-sm font-medium">
-            Página {pageIndex + 1} de {pages}
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              onClick={() => onPageChange(0)}
-              variant="ghost"
-              className="h-8 w-8 p-0"
-              disabled={pageIndex === 0}
-            >
-              <ChevronsLeft className="h-4 w-4" />
-              <span className="sr-only">Primeira página</span>
-            </Button>
-            <PaginationPrevious
-              onClick={() => onPageChange(pageIndex - 1)}
-              className="h-8 w-8 p-0"
-              disabled={pageIndex === 0}
-            />
-            <PaginationNext
-              onClick={() => onPageChange(pageIndex + 1)}
-              className="h-8 w-8 p-0"
-              disabled={pageIndex === pages - 1}
-            />
-            <Button
-              onClick={() => onPageChange(pages - 1)}
-              variant="ghost"
-              className="h-8 w-8 p-0"
-              disabled={pageIndex === pages - 1}
-            >
-              <ChevronsRight className="h-4 w-4" />
-              <span className="sr-only">Última página</span>
-            </Button>
-          </div>
+      <div className="flex items-center gap-6 lg:gap-8">
+        <div className="text-sm font-medium">
+          Página {pageIndex + 1} de {pages}
         </div>
-      </PaginationContent>
-    </PaginationRoot>
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={() => onPageChange(0)}
+            variant="ghost"
+            className="h-8 w-8 p-0"
+            disabled={pageIndex === 0}
+          >
+            <ChevronsLeft className="h-4 w-4" />
+            <span className="sr-only">Primeira página</span>
+          </Button>
+          <Button
+            onClick={() => onPageChange(pageIndex - 1)}
+            variant="ghost"
+            className="h-8 w-8 p-0"
+            disabled={pageIndex === 0}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            <span className="sr-only">Página anterior</span>
+          </Button>
+          <Button
+            onClick={() => onPageChange(pageIndex + 1)}
+            variant="ghost"
+            className="h-8 w-8 p-0"
+            disabled={pages <= pageIndex + 1}
+          >
+            <ChevronRight className="h-4 w-4" />
+            <span className="sr-only">Próxima página</span>
+          </Button>
+          <Button
+            onClick={() => onPageChange(pages - 1)}
+            variant="ghost"
+            className="h-8 w-8 p-0"
+            disabled={pageIndex === pages - 1}
+          >
+            <ChevronsRight className="h-4 w-4" />
+            <span className="sr-only">Última página</span>
+          </Button>
+        </div>
+      </div>
+    </div>
   )
 }

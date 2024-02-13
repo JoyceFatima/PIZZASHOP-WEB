@@ -75,7 +75,7 @@ export function StoreProfileDialog() {
   const { mutateAsync: updateProfileFn } = useMutation({
     mutationFn: updateProfile,
     onMutate({ name, description }) {
-      const { cached } = updateManagerRestaurantCache(name, description)
+      const { cached } = updateManagerRestaurantCache({ name, description })
 
       return { previousProfile: cached }
     },

@@ -73,7 +73,12 @@ export function SignIn() {
               <Input id="email" type="email" {...register('email')} />
             </div>
 
-            <Button disabled={isSubmitting} className="w-full" type="submit">
+            <Button
+              disabled={isSubmitting}
+              variant="destructive"
+              className="w-full"
+              type="submit"
+            >
               Acessar painel
             </Button>
           </form>

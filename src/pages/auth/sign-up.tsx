@@ -100,7 +100,12 @@ export function SignUp() {
               <Input id="email" type="tel" {...register('email')} />
             </div>
 
-            <Button disabled={isSubmitting} className="w-full" type="submit">
+            <Button
+              disabled={isSubmitting}
+              variant="destructive"
+              className="w-full"
+              type="submit"
+            >
               Finalizar cadastro
             </Button>
 
